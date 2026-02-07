@@ -7,12 +7,17 @@ import os
 BOT_TOKEN = os.environ["BOT_TOKEN"]
 CHAT_ID = os.environ["CHAT_ID"]
 
+FORCE_TEST = True  # set False after testing
+
 bot = Bot(token=BOT_TOKEN)
 IST = pytz.timezone("Asia/Kolkata")
 
 now = datetime.datetime.now(IST)
-today = now.strftime("%A")
-current_time = now.strftime("%H:%M")
+# today = now.strftime("%A")
+# current_time = now.strftime("%H:%M")
+
+today = "Wednesday" if FORCE_TEST else now.strftime("%A")
+
 
 with open("timetable.json") as f:
     timetable = json.load(f)
