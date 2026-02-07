@@ -2,11 +2,12 @@ import json
 import os
 import datetime
 import pytz
+import asyncio
 from telegram import Bot
 
 # ========== FORCE TEST CONFIG ==========
 FORCE_TEST = False
-FORCE_DAY = "Wednesday"   # Change to any weekday
+FORCE_DAY = "Wednesday"   # Any weekday
 # ======================================
 
 BOT_TOKEN = os.environ["BOT_TOKEN"]
@@ -32,6 +33,9 @@ if today not in timetable:
     print("No classes for", today)
     exit()
 
+next_class = None
+min_diff = float("inf")
+
 for p in timetable[today]:
     class_time = datetime.datetime.strptime(p["start"], "%H:%M").time()
     class_dt = IST.localize(
@@ -40,20 +44,29 @@ for p in timetable[today]:
 
     diff_minutes = (class_dt - now).total_seconds() / 60
 
-    print(
-        f"[DEBUG] {p['subject']} starts in "
-        f"{diff_minutes:.2f} minutes"
-    )
+    print(f"[DEBUG] {p['subject']} starts in {diff_minutes:.2f} minutes")
 
-    # ⏰ alert window
-    if 0 <= diff_minutes <= 10 or FORCE_TEST:
+    if diff_minutes >= 0 and diff_minutes < min_diff:
+        min_diff = diff_minutes
+        next_class = p
+
+async def send():
+    if not next_class:
+        print("No upcoming class")
+        return
+
+    if FORCE_TEST or 0 <= min_diff <= 10:
         msg = (
-            f"🧪 FORCE TEST\n"
-            f"📅 Acting as: {today}\n\n"
-            f"📚 {p['subject']}\n"
-            f"⏰ {p['start']} - {p['end']}\n"
-            f"📍 {p['block']} | {p['room']}"
+            f"{'🧪 FORCE TEST\n📅 Acting as: ' + today + '\n\n' if FORCE_TEST else ''}"
+            f"📚 {next_class['subject']}\n"
+            f"⏰ {next_class['start']} - {next_class['end']}\n"
+            f"📍 {next_class['block']} | {next_class['room']}"
         )
-        bot.send_message(chat_id=CHAT_ID, text=msg)
+        await bot.send_message(chat_id=CHAT_ID, text=msg)
+        print("Message sent")
+    else:
+        print("Next class not in alert window")
+
+asyncio.run(send())
 
 print("=== BOT FINISHED ===")
