@@ -1,46 +1,33 @@
 import json
-import os
-from datetime import datetime, timedelta
+import datetime
 import pytz
 from telegram import Bot
-from apscheduler.schedulers.blocking import BlockingScheduler
+import os
 
 BOT_TOKEN = os.environ["BOT_TOKEN"]
 CHAT_ID = os.environ["CHAT_ID"]
 
 bot = Bot(token=BOT_TOKEN)
-scheduler = BlockingScheduler(timezone="Asia/Kolkata")
+IST = pytz.timezone("Asia/Kolkata")
+
+now = datetime.datetime.now(IST)
+today = now.strftime("%A")
+current_time = now.strftime("%H:%M")
 
 with open("timetable.json") as f:
     timetable = json.load(f)
 
-def send_message(text):
-    bot.send_message(chat_id=CHAT_ID, text=text)
+if today in timetable:
+    for p in timetable[today]:
+        class_time = datetime.datetime.strptime(p["start"], "%H:%M").time()
+        class_dt = IST.localize(datetime.datetime.combine(now.date(), class_time))
 
-def schedule_classes():
-    for day, periods in timetable.items():
-        for period in periods:
-            hour, minute = map(int, period["start"].split(":"))
+        diff = (class_dt - now).total_seconds() / 60
 
-            notify_time = datetime.now(pytz.timezone("Asia/Kolkata")).replace(
-                hour=hour,
-                minute=minute,
-                second=0,
-                microsecond=0
-            ) - timedelta(minutes=5)
-
-            scheduler.add_job(
-                send_message,
-                "cron",
-                day_of_week=day.lower()[:3],
-                hour=notify_time.hour,
-                minute=notify_time.minute,
-                args=[f"""
-📚 {period['subject']}
-⏰ {period['start']} - {period['end']}
-📍 {period['block']} | {period['room']}
-"""]
+        if 4 <= diff <= 5:
+            msg = (
+                f"📚 {p['subject']}\n"
+                f"⏰ {p['start']} - {p['end']}\n"
+                f"📍 {p['block']} | {p['room']}"
             )
-
-schedule_classes()
-scheduler.start()
+            bot.send_message(chat_id=CHAT_ID, text=msg)
