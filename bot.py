@@ -1,38 +1,47 @@
-import json
-import datetime
-import pytz
 from telegram import Bot
 import os
+import datetime
+import pytz
 
-BOT_TOKEN = os.environ["BOT_TOKEN"]
-CHAT_ID = os.environ["CHAT_ID"]
+print("=== BOT STARTED ===")
 
-FORCE_TEST = True  # set False after testing
+# 🔧 Force trigger switch (TURN OFF AFTER TESTING)
+FORCE_TRIGGER = True
 
+# Secrets
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
+CHAT_ID = os.environ.get("CHAT_ID")
+
+print("BOT_TOKEN present:", bool(BOT_TOKEN))
+print("CHAT_ID present:", bool(CHAT_ID))
+print("CHAT_ID value:", CHAT_ID)
+
+if not BOT_TOKEN or not CHAT_ID:
+    print("Missing secrets, exiting.")
+    exit(1)
+
+# Init bot
 bot = Bot(token=BOT_TOKEN)
+print("Bot initialized")
+
+# Time info
 IST = pytz.timezone("Asia/Kolkata")
-
 now = datetime.datetime.now(IST)
-# today = now.strftime("%A")
-# current_time = now.strftime("%H:%M")
 
-today = "Wednesday" if FORCE_TEST else now.strftime("%A")
+print("Current IST time:", now)
+print("FORCE_TRIGGER:", FORCE_TRIGGER)
 
+try:
+    if FORCE_TRIGGER:
+        print("Force trigger enabled → sending message")
+        bot.send_message(
+            chat_id=CHAT_ID,
+            text="🧪 FORCE TEST: Telegram bot is working"
+        )
+    else:
+        print("Force trigger disabled → normal flow (not implemented here)")
+except Exception as e:
+    print("ERROR while sending message:")
+    print(e)
 
-with open("timetable.json") as f:
-    timetable = json.load(f)
-
-if today in timetable:
-    for p in timetable[today]:
-        class_time = datetime.datetime.strptime(p["start"], "%H:%M").time()
-        class_dt = IST.localize(datetime.datetime.combine(now.date(), class_time))
-
-        diff = (class_dt - now).total_seconds() / 60
-
-        if 4 <= diff <= 5:
-            msg = (
-                f"📚 {p['subject']}\n"
-                f"⏰ {p['start']} - {p['end']}\n"
-                f"📍 {p['block']} | {p['room']}"
-            )
-            bot.send_message(chat_id=CHAT_ID, text=msg)
+print("=== BOT FINISHED ===")
