@@ -5,7 +5,7 @@ import pytz
 from telegram import Bot
 
 # ========== FORCE TEST CONFIG ==========
-FORCE_TEST = True
+FORCE_TEST = False
 FORCE_DAY = "Wednesday"   # Change to any weekday
 # ======================================
 
