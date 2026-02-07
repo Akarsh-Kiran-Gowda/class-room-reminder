@@ -97,7 +97,7 @@
     },
     {
       "subject": "CC: Cloud Computing",
-      "start": "13:50",
+      "start": "13:30",
       "end": "14:25",
       "block": "SVB",
       "room": "214"
@@ -169,5 +169,21 @@
       "block": "SVB",
       "room": "F1"
     }
-  ]
+  ],
+"Saturday": [
+  {
+    "subject": "🧪 TEST: Web Technology",
+    "start": "13:45",
+    "end": "14:40",
+    "block": "SVB",
+    "room": "TEST-101"
+  },
+  {
+    "subject": "🧪 TEST: Cloud Computing",
+    "start": "15:00",
+    "end": "15:55",
+    "block": "SVB",
+    "room": "TEST-202"
+  }
+]
 }
