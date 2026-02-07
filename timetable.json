@@ -173,15 +173,15 @@
 "Saturday": [
   {
     "subject": "🧪 TEST: Web Technology",
-    "start": "13:45",
-    "end": "14:40",
+    "start": "15:30",
+    "end": "16:00",
     "block": "SVB",
     "room": "TEST-101"
   },
   {
     "subject": "🧪 TEST: Cloud Computing",
-    "start": "15:00",
-    "end": "15:55",
+    "start": "16:00",
+    "end": "16:35",
     "block": "SVB",
     "room": "TEST-202"
   }
