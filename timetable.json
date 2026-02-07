@@ -1,0 +1,173 @@
+{
+  "Monday": [
+    {
+      "subject": "CCL: Cloud Computing Lab",
+      "start": "08:30",
+      "end": "10:20",
+      "block": "SVB",
+      "room": "F3"
+    },
+    {
+      "subject": "PE-4 SDEL",
+      "start": "10:40",
+      "end": "11:35",
+      "block": "SVB",
+      "room": "201"
+    },
+    {
+      "subject": "WT: Web Technology",
+      "start": "11:35",
+      "end": "12:30",
+      "block": "SVB",
+      "room": "201"
+    },
+    {
+      "subject": "ASDD: Agile Software Development and DevOps",
+      "start": "13:30",
+      "end": "14:25",
+      "block": "SVB",
+      "room": "101"
+    }
+  ],
+  "Tuesday": [
+    {
+      "subject": "CC: Cloud Computing",
+      "start": "08:30",
+      "end": "09:25",
+      "block": "SVB",
+      "room": "215"
+    },
+    {
+      "subject": "CNS: Cryptography and Network Security",
+      "start": "09:25",
+      "end": "10:20",
+      "block": "SVB",
+      "room": "215"
+    },
+    {
+      "subject": "OE-2 (Open Elective 2)",
+      "start": "10:40",
+      "end": "11:35",
+      "block": "SVB",
+      "room": "Dynamic"
+    },
+    {
+      "subject": "PE-5 AIDCM",
+      "start": "11:35",
+      "end": "12:30",
+      "block": "SVB",
+      "room": "112"
+    },
+    {
+      "subject": "WT: Web Technology",
+      "start": "13:30",
+      "end": "14:25",
+      "block": "SVB",
+      "room": "113"
+    }
+  ],
+  "Wednesday": [
+    {
+      "subject": "ASDD: Agile Software Development and DevOps",
+      "start": "08:30",
+      "end": "09:25",
+      "block": "SVB",
+      "room": "318"
+    },
+    {
+      "subject": "WT: Web Technologies",
+      "start": "09:25",
+      "end": "10:20",
+      "block": "SVB",
+      "room": "318"
+    },
+    {
+      "subject": "PE-5 AIDCM",
+      "start": "10:40",
+      "end": "11:35",
+      "block": "SVB",
+      "room": "114"
+    },
+    {
+      "subject": "PE-4 SDEL",
+      "start": "11:35",
+      "end": "12:30",
+      "block": "SVB",
+      "room": "114"
+    },
+    {
+      "subject": "CC: Cloud Computing",
+      "start": "13:30",
+      "end": "14:25",
+      "block": "SVB",
+      "room": "214"
+    },
+    {
+      "subject": "WTL: Web Technologies Lab",
+      "start": "14:25",
+      "end": "16:15",
+      "block": "SVB",
+      "room": "S1"
+    }
+  ],
+  "Thursday": [
+    {
+      "subject": "CNS: Cryptography and Network Security",
+      "start": "08:30",
+      "end": "09:25",
+      "block": "SVB",
+      "room": "203"
+    },
+    {
+      "subject": "CC: Cloud Computing",
+      "start": "09:25",
+      "end": "10:20",
+      "block": "SVB",
+      "room": "203"
+    },
+    {
+      "subject": "OE-2 (Open Elective 2)",
+      "start": "10:40",
+      "end": "12:30",
+      "block": "SVB",
+      "room": "Dynamic"
+    },
+    {
+      "subject": "PE-5 AIDCM",
+      "start": "13:30",
+      "end": "14:25",
+      "block": "SVB",
+      "room": "113"
+    }
+  ],
+  "Friday": [
+    {
+      "subject": "CNS: Cryptography and Network Security",
+      "start": "08:30",
+      "end": "09:25",
+      "block": "SVB",
+      "room": "214"
+    },
+    {
+      "subject": "ASDD: Agile Software Development and DevOps",
+      "start": "09:25",
+      "end": "10:20",
+      "block": "SVB",
+      "room": "214"
+    },
+    {
+      "subject": "PE-4 SDEL",
+      "start": "13:30",
+      "end": "14:25",
+      "block": "SVB",
+      "room": "101"
+    },
+    {
+      "subject": "CNSL: Cryptography and Network Security Lab",
+      "start": "14:25",
+      "end": "16:15",
+      "block": "SVB",
+      "room": "F1"
+    }
+  ]
+}
