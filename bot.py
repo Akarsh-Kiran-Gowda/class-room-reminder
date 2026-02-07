@@ -55,13 +55,19 @@ async def send():
         print("No upcoming class")
         return
 
+    if FORCE_TEST:
+        prefix = f"🧪 FORCE TEST\n📅 Acting as: {today}\n\n"
+    else:
+        prefix = ""
+
     if FORCE_TEST or 0 <= min_diff <= 10:
         msg = (
-            f"{'🧪 FORCE TEST\n📅 Acting as: ' + today + '\n\n' if FORCE_TEST else ''}"
-            f"📚 {next_class['subject']}\n"
-            f"⏰ {next_class['start']} - {next_class['end']}\n"
-            f"📍 {next_class['block']} | {next_class['room']}"
+            prefix
+            + f"📚 {next_class['subject']}\n"
+            + f"⏰ {next_class['start']} - {next_class['end']}\n"
+            + f"📍 {next_class['block']} | {next_class['room']}"
         )
+
         await bot.send_message(chat_id=CHAT_ID, text=msg)
         print("Message sent")
     else:
